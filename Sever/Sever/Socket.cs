@@ -8,5 +8,7 @@ namespace Sever
 {
     class Socket
     {
+        //쓰레드 이용
+        //제이쓰ㅜㄴ작업 .
     }
 }
