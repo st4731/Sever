@@ -5,21 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sever
+namespace Server
 {
     public class Json
     {
-        public Json()
+        public static string id;
+        public static string pw;
+        public static void Pasing()
         {
-
-        }
-        void Parsing(String json_st)
-        {
-            string json = json_st;
-            JArray array = JArray.Parse(json);
+            //string json = Var_static.json;
+            /*JArray array = JArray.Parse(str);
             string type;
-            string id;
-            string pw;
             try
             {
                 foreach (JObject JObject in array)
@@ -32,7 +28,7 @@ namespace Sever
                     }
                 }
             }
-            catch {}
+            catch {}*/
         }
 
     }

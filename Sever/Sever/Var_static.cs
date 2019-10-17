@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sever
+namespace Server
 {
     class Var_static
     {
-        static Json json = new Json();
+        public static Json json = new Json();
+        public static String strdata = "";
     }
 }

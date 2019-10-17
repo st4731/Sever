@@ -4,9 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sever
+
+namespace Server
 {
-    class Main
+    class Program
     {
+        static void Main()
+        {
+            socket.서버();
+        }
     }
+
 }
