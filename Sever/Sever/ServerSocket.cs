@@ -61,14 +61,14 @@ namespace Server
                 {
                     TcpClient client = tcp_Listener.AcceptTcpClient();//클라이언트 접속.
                     Console.WriteLine("접속완료후 다음 쓰레드 시작");
-                    Thread startClientThread = new Thread(new ParameterizedThreadStart(받음)); // Client로 부터 접속
+                    Thread startClientThread = new Thread(new ParameterizedThreadStart(받음상시대기)); // Client로 부터 접속
                     Console.WriteLine("시작");
                     startClientThread.Start(client);
                 }
             }
             catch (Exception e) { Console.WriteLine(e.ToString()); }
         }
-        public static void 받음(object client)
+        public static void 받음상시대기(object client)
         {
             Console.WriteLine("받음 시작");
             try
