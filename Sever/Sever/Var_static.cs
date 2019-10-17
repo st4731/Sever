@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Sever
 {
-    class Socket
+    class Var_static
     {
-        //쓰레드 이용
-        //제이쓰ㅜㄴ작업 .
+        static Json json = new Json();
     }
 }
