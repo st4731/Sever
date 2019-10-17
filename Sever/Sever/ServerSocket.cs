@@ -61,6 +61,7 @@ namespace Server
                 {
                     TcpClient client = tcp_Listener.AcceptTcpClient();//클라이언트 접속.
                     Console.WriteLine("접속완료후 다음 쓰레드 시작");
+                    Console.WriteLine(client);
                     Thread startClientThread = new Thread(new ParameterizedThreadStart(받음상시대기)); // Client로 부터 접속
                     Console.WriteLine("시작");
                     startClientThread.Start(client);
@@ -74,6 +75,7 @@ namespace Server
             try
             {
                 TcpClient tcpClient = (TcpClient)client; // tcp Client 생성
+                Console.WriteLine(tcpClient);
                 Stream = tcpClient.GetStream(); // Client로 부터 Stream 받아오기/
                 if (Stream != null)
                 {
@@ -84,7 +86,7 @@ namespace Server
                     {
                         byteRead = 0;
                         byteRead = Stream.Read(message, 0, 4096); // 클라이언트로 부터 Stream Read..
-                        ASCIIEncoding encoder = new ASCIIEncoding(); ; // 변환
+                        UTF8Encoding encoder = new UTF8Encoding(); // 변환
                         Console.WriteLine("출력 진입전");
                         출력(message, byteRead);
                     }
@@ -102,7 +104,7 @@ namespace Server
         {
             Console.WriteLine("출력 진입");
             mbyteSize += byteRead; // 사이즈 누적
-            ASCIIEncoding encoder = new ASCIIEncoding(); // 변환
+            UTF8Encoding encoder = new UTF8Encoding();// 변환
             strBuffer += encoder.GetString(data, 0, byteRead); //  버퍼 누적 ( 잘려서 들어오는 경우가 있을 경우)
 
             if (mbyteSize <= 문자길이)
