@@ -11,10 +11,10 @@ namespace Server
     {
         public static string id;
         public static string pw;
-        public static void Pasing()
+        public static void Pasing(object json_re)
         {
-            //string json = Var_static.json;
-            /*JArray array = JArray.Parse(str);
+            string json = (string)json_re;
+            JArray array = JArray.Parse(json);
             string type;
             try
             {
@@ -25,10 +25,22 @@ namespace Server
                     {
                         id = JObject["id"].ToString();
                         pw = JObject["pw"].ToString();
+                        //디비비교_보내기(id,pw);
                     }
                 }
             }
-            catch {}*/
+            catch {}
+        }
+        public static void unPasing(object Stream)
+        {
+            string str = (string)Stream;
+            JArray jArray = new JArray();
+            jArray.Add("1번 값");
+            jArray.Add("2번 값");
+            JObject jObject = new JObject();
+            jObject["이름"]= jArray;
+            string json = jObject.ToString();
+            socket.보냄(str,json);
         }
 
     }

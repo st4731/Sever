@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,6 +11,19 @@ using System.Threading.Tasks;
 
 namespace Server
 {
+    class 소켓
+    {
+        Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        IPEndPoint IP = new IPEndPoint(IPAddress.Any, 5000);
+        void 서버()
+        {
+            socket.Bind(IP);//실제 주소로 배정.
+            socket.Listen(3);//접속을 기다리는 상태 숫자는 최대 연결수 같음.
+            while (true)
+            {
+                Socket 클라이언트소켓 = (Socket)socket.Accept();//연결
+            }
+        }
     /*class Server
     {
         static byte[] Buffer { get; set; }
@@ -38,13 +52,13 @@ namespace Server
 
         }
     }*/
-    public class socket {
+   /* public class socket {
         public static TcpListener tcp_Listener; // TCP 통신 Listener 
         public static Thread Thread; // Thread 객체
         public static NetworkStream Stream;// 전송되는 값 받아오는 객체
         public static void 서버()
         {
-           string IP= Dns.GetHostByName(Dns.GetHostName()).AddressList[0].ToString();
+            string IP = "210.93.84.206";//Dns.GetHostByName(Dns.GetHostName()).AddressList[0].ToString();
            Console.WriteLine(IP);
            IPAddress ipAddress = IPAddress.Parse(IP);
            tcp_Listener = new TcpListener(ipAddress, 5000); // TCP Listener Thread 정의
@@ -77,10 +91,21 @@ namespace Server
                 TcpClient tcpClient = (TcpClient)client; // tcp Client 생성
                 Console.WriteLine(tcpClient);
                 Stream = tcpClient.GetStream(); // Client로 부터 Stream 받아오기/
+                Console.WriteLine(Stream);
                 if (Stream != null)
                 {
                     byte[] message = new byte[4096]; // Message Byte 생성
                     int byteRead; // byte 받아오기
+                    JArray jArray = new JArray();
+                    jArray.Add("1번 값");
+                    jArray.Add("2번 값");
+                    JObject jObject = new JObject();
+                    jObject["이름"] = jArray;
+                    string json = jObject.ToString();
+                    string test = "12213";
+                    byte[] data = Encoding.UTF8.GetBytes(test);
+                    Stream.Write(data, 0, data.Length);
+                    Console.WriteLine(data);
 
                     while (true)
                     {
@@ -89,6 +114,7 @@ namespace Server
                         UTF8Encoding encoder = new UTF8Encoding(); // 변환
                         Console.WriteLine("출력 진입전");
                         출력(message, byteRead);
+                        //Json.unPasing(Stream);
                     }
                 }
             }
@@ -113,5 +139,13 @@ namespace Server
                 strBuffer = string.Empty;
             }
         }
-    }
+        public static void 보냄(Object Str,Object send)
+        {
+            Stream = (NetworkStream)Str;
+            string str = (string)send;
+            byte[] data = Encoding.UTF8.GetBytes(str);
+            Stream.Write(data, 0, data.Length);
+
+        }
+    }*/
 }
